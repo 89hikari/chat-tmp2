@@ -1,0 +1,16 @@
+.chat-input{
+    padding: 30px;
+    padding-right: 100px;
+    position: relative;
+    &__action{
+        position: absolute;
+        right: 30px;
+        top: 20px;
+        cursor: pointer;
+        font-size:30px;
+        opacity: 0.5;
+        &:hover{
+            opacity: 1;
+        }
+    }
+}

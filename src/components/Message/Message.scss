@@ -1,0 +1,138 @@
+
+.message {
+    $self: &;
+    display: flex;
+    max-width: 450px;
+    padding-bottom: 10px;
+    
+    &__avatar {
+        display: flex;
+        flex-direction: column-reverse;
+
+        .avatar {
+            border-radius: 40px;
+            width: 33px;
+            height: 33px;
+            margin-right: 10px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            line-height: 31px;
+        }
+    }
+
+    &__content{
+        position: relative;
+    }
+
+    &__icon-checked{
+        position: absolute;
+        width: 15px;
+        height: 15px;
+        bottom: 25px;
+        left: -20px;
+    }
+
+    &__bubble {
+        background: rgb(245, 160, 211);
+        background: linear-gradient(180deg, rgb(71, 68, 124) 23%, rgb(53, 26, 117) 100%);
+        box-shadow: 0px 5px 5px rgba($color: #d4b9f3, $alpha: 1.0);
+        border-radius: 10px 10px 10px 0px;
+        padding: 15px;
+        margin-bottom: 5px;
+
+        .typing-indicator {
+            will-change: transform;
+            width: auto;
+            border-radius: 50px;
+            padding-left: 20px;
+            padding-right: 20px;
+            display: table;
+            margin: 0 auto;
+            position: relative;
+            animation: 2s bulge infinite ease-out;
+            &::before,
+            &::after {
+              content: '';
+              position: absolute;
+              bottom: -2px;
+              left: -2px;
+              height: 20px;
+              width: 20px;
+              border-radius: 50%;
+            }
+            &::after {
+              height: 10px;
+              width: 10px;
+              left: -10px;
+              bottom: -10px;
+            }
+            span {
+              height: 8px;
+              width: 8px;
+              float: left;
+              margin: 0 1px;
+              background-color: #9bcc8f;
+              display: block;
+              border-radius: 50%;
+              opacity: 0.4;
+              @for $i from 1 through 3 {
+                &:nth-of-type(#{$i}) {
+                  animation: 1s blink infinite ($i * .3333s);
+                }
+              }
+            }
+          }
+          
+          @keyframes blink {
+            50% {
+              opacity: 1;
+            }
+          }
+          
+          @keyframes bulge {
+            50% {
+              transform: scale(1.05);
+            }
+          }
+
+    }
+
+    &__date {
+        font-size: 14px;
+        opacity: 0.5;
+    }
+
+    &__text {
+        color: #fff;
+        margin: 0;
+        line-height: 20px;
+    }
+
+    &--isme{
+        display: flex;
+        flex-direction: row-reverse;
+        margin-left: auto;
+        margin-right: 0em;
+
+        #{ $self }__bubble {
+            background: rgb(211,189,226);
+            background: linear-gradient(0deg, rgb(161, 225, 255) 0%, rgb(220, 255, 255) 50%);
+            box-shadow: 0px 5px 5px rgba($color: #f6f2fa, $alpha: 1.0);
+            border-radius: 10px 10px 0px 10px;
+            padding: 15px;
+            margin-bottom: 5px;
+            #{ $self }__text {
+                color: black;
+                margin: 0;
+                line-height: 20px;
+            }
+        }
+
+        #{ $self }__date {
+            display: flex; 
+            justify-content: flex-end;
+        }
+
+    }
+    
+}

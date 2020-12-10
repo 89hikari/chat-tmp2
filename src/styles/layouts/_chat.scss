@@ -1,0 +1,84 @@
+.chat{
+    background-color: #fff;
+    display: flex;
+    position: fixed;
+    overflow: hidden;
+    left: 0; 
+    right: 0;
+    top: 0; 
+    bottom: 0;
+    margin: 20px;
+    padding: 15px;
+    -webkit-box-shadow: 0px 0px 89px 3px rgba(34, 60, 80, 0.22);
+    -moz-box-shadow: 0px 0px 89px 3px rgba(34, 60, 80, 0.22);
+    box-shadow: 0px 0px 89px 3px rgba(34, 60, 80, 0.22);
+    border-radius: 10px;
+
+    &__sidebar{
+        
+        &-header{
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+
+            & > div {
+                span {
+                    display: inline-block;
+                    margin-left: 8px;
+                }
+            }
+            &-searchicon{
+                padding-top: 5px;
+                padding-right: 30px;
+            }
+        }
+        &-search{
+            padding: 15px;
+        }
+
+        &-dialogs {
+                overflow: auto;
+                background-color: #ffffff;
+                height: calc(100% - 50px);
+            .dialogs{
+
+                &__item{
+                    padding: 10px 20px;
+                    margin-bottom: 0;
+                    cursor: pointer;
+
+                    &.active,
+                    &:hover{
+                        background-color: rgb(243, 242, 242);
+                    }
+                }
+            }
+        }
+
+        width: 400px;
+    }
+
+    &__dialog{
+        flex: 1;
+
+        &-messages{
+            
+            height: calc(100% - 170px);
+        }
+
+        &-header {
+            display: flex;
+            padding: 20px;
+            align-items: center;
+            justify-content: space-between;
+
+            &-center{
+                text-align: center;
+            }
+            &-username{
+                font-weight: bold;
+            }
+        }
+    }
+
+}
