@@ -12,3 +12,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.auth__labels {
+  margin-left: auto !important;
+    margin-right: auto !important;
+}
