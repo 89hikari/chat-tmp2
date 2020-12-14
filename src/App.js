@@ -21,7 +21,8 @@ class App extends Component {
       logged_in: isLogin,
       username: '',
       id: null,
-      allUsers: this.getAllUsers()
+      allUsers: [],
+      contacts: []
     };
   }
 
@@ -42,6 +43,17 @@ class App extends Component {
           localStorage.setItem('token', json.token);
           this.setState({ username: json.username, displayed_form: 'home', logged_in: true });
         });
+
+        fetch('https://sleepy-waters-05131.herokuapp.com/users/contacts/', {
+          method: "GET",
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `JWT ${localStorage.getItem('token')}`,
+            }
+          }).then(res => res.json())
+          .then(json => {
+            this.setState({ contacts: json });
+          });
     }
   }
 
@@ -143,7 +155,7 @@ class App extends Component {
         form = 
         <div>
           <label className="logout" onClick={() => this.handle_logout()}>Logout</label>
-          <Home getAllUsers={this.state.allUsers}/>
+          <Home getAllUsers={this.state.contacts}/>
         </div>
 
         break;
