@@ -1,11 +1,11 @@
 import React, {useState} from 'react'
 import {Modal, Input } from 'antd'
-import {Dialogs} from '../../containers'
+import {Dialogs} from '../../components'
 import { TeamOutlined, FormOutlined } from "@ant-design/icons";
 
 import './Sidebar.scss'
 
-const Sidebar = ({ user }) => {
+const Sidebar = (props) => {
     const { Search } = Input;
     const onSearch = value => console.log(value);
     const [visible, setVisible] = useState(false);
@@ -26,7 +26,7 @@ const Sidebar = ({ user }) => {
                 <div className="chat__sidebar-dialogs">
                     <div className="dialogs">
                         <Dialogs
-                            userId={0}
+                            items={props.users}
                         />
                     </div>
                     <Modal

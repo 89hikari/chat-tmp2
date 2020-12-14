@@ -1,4 +1,4 @@
-import tinycolor from "tinycolor";
+import tinycolor from "tinycolor2";
 
 const getCorrectIndex = number => {
     return number > 255 ? 255 : number < 0 ? 0 : number;

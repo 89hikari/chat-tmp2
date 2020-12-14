@@ -15,13 +15,13 @@ const getMessageTime = created_at => {
 };
 
 // один элемент в баре слева
-const DialogItem = ({ _id, user, created_at, unreaded, isMe, text, onSelect}) => {
+const DialogItem = ({ id, user, avatar, created_at, unreaded, isMe, text, onSelect}) => {
         return (
-            <div className={classNames("dialogs__item", {"dialogs__item--online": user.isOnline})} onClick={onSelect.bind(this, _id)}>
-                <div className="dialogs__item-avatar"><Avatar user={user}/></div>
+            <div className={classNames("dialogs__item", {"dialogs__item--online": user.isOnline})} /*onClick={onSelect.bind(id)}*/>
+                <div className="dialogs__item-avatar"><Avatar avatar={avatar} id={id} user={user}/></div>
                 <div className="dialogs__item-info">
                     <div className="dialogs__item-info-top">
-                        <b>{user.fullname}</b>
+                        <b>{user}</b>
                         <span>
                             {getMessageTime(created_at)}
                         </span>

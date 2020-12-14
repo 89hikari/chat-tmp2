@@ -5,15 +5,14 @@ import {dialogsActions} from './../redux/actions'
 import {Dialogs as BaseDialogs} from './../components';
 
 const Dialogs = ({fetchDialogs, setCurrentDialogId, items, userId}) => {
-    
-    const [inputValue, setValue] = useState('');
-    const [filtered, setFilteredItems] = useState(Array.from(items));
 
+    console.log(items);
+    const [inputValue, setValue] = useState('');
+    const [filtered, setFilteredItems] = useState(items);
     const onChangeInput = value => {
         setFilteredItems(items.filter(dialog => dialog.user.fullname.toLowerCase().indexOf(value.toLowerCase()) >= 0))
         setValue(value); 
     }
-
     useEffect(() => {
         if (!items.length) {
             fetchDialogs();
@@ -21,6 +20,17 @@ const Dialogs = ({fetchDialogs, setCurrentDialogId, items, userId}) => {
             setFilteredItems(items);
         }
     }, [items])
+
+    let key = 0;
+    
+    let arr = {};
+
+    userId.then((value) => {
+        value.map(function(name) {
+            console.log(name)
+            
+          });
+    })
 
     return <BaseDialogs 
     userId={userId} 

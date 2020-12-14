@@ -44,7 +44,7 @@ class RegistrationForm extends Component {
                             <input className="submit-button" type="submit" value="Signup"/>
                         </form>
 
-                            <Link className="auth__registration-link" to="/login">Already registered?</Link>
+                            <Link className="auth__registration-link" onClick={e => this.props.display_form('login')}>Already registered?</Link>
 
                 </WhiteBlock>
             </div>

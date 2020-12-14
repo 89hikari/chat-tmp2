@@ -10,12 +10,11 @@ import { useState } from 'react';
 
 //главная страница im
 
-const Home = () => (
+const Home = (props) => (
     <section className="home">
 
         <div className="chat">
-
-            <Sidebar />
+            <Sidebar users={props.getAllUsers}/>
 
             <div className="chat__dialog">
                 <div className="chat__dialog-header">

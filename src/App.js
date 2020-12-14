@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Route } from "react-router-dom";
 import { LoginForm, RegistrationForm } from './modules';
+import fetch from 'isomorphic-fetch';
 
 import { Auth, Home } from './pages';
 import './index.css';
@@ -19,11 +20,12 @@ class App extends Component {
       displayed_form: '',
       logged_in: isLogin,
       username: '',
+      id: null,
+      allUsers: this.getAllUsers()
     };
   }
 
   componentDidMount() {
-    console.log(localStorage.getItem('token'))
     if (this.state.logged_in) {
       fetch('https://sleepy-waters-05131.herokuapp.com/token-refresh/', {
         method: 'POST',
@@ -64,28 +66,44 @@ class App extends Component {
       });
   };
 
-  getDialogs = () => {
-
+  async getAllUsers(){
+    await fetch('https://sleepy-waters-05131.herokuapp.com/users/users/', {
+      method: "GET",
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `JWT ${localStorage.getItem('token')}`,
+        }
+      }).then((response) => response.json())
+      .then((responseData) => {
+        console.log(responseData);
+        this.setState({
+          allUsers: responseData,
+        })
+        return responseData;
+      })
   }
+  
+  getUsers = () => {  
+    let a = this.getAllUsers();
+    return a;
+  };
 
   handle_signup = (e, data) => {
     e.preventDefault();
-    fetch('http://sleepy-waters-05131.herokuapp.com/users/users', {
-      method: 'POST',
+    fetch('http://sleepy-waters-05131.herokuapp.com/users/users/', {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
+        'Content-Type': 'application/json'
       },
-      body: JSON.stringify({
-        username: data.username,
-        password: data.password
-      })
+      body: JSON.stringify(data)
     })
       .then(res => res.json())
       .then(json => {
         localStorage.setItem('token', json.token);
         this.setState({
-          username: json.username
+          username: json.username,
+          id: json.id,
+          displayed_form: 'home'
         });
       });
   };
@@ -105,31 +123,39 @@ class App extends Component {
   };
 
   render() {
-
-    const logged_out_nav = (
-      <div className="auth__labels" >
-        <label className="login__label" onClick={() => this.display_form('login')}>Login</label>
-        <label className="signup__label" onClick={() => this.display_form('signup')}>Sign Up</label>
-        <label className="logout" onClick={() => this.handle_logout()}>Logout</label>
-      </div>
-    );
     let form;
     switch(this.state.displayed_form){
       case 'login':
         form = <LoginForm handle_login={this.handle_login}/>
+        return  <div className="auth__labels" >
+                  <label className="signup__label" onClick={() => this.display_form('signup')}>Sign Up</label>
+                  <LoginForm handle_login={this.handle_login} display_form={this.display_form}/>
+                </div>
         break;
       case 'signup':
         form = <RegistrationForm handle_signup={this.handle_signup} />
+        return <div className="auth__labels" >
+                <label className="login__label" onClick={() => this.display_form('login')}>Login</label>
+                <RegistrationForm handle_signup={this.handle_signup} display_form={this.display_form}/>
+              </div>
         break;
       case 'home':
-        form = <Home />
+        form = 
+        <div>
+          <label className="logout" onClick={() => this.handle_logout()}>Logout</label>
+          <Home getAllUsers={this.state.allUsers}/>
+        </div>
+
         break;
       default:
-        form = null;
+        form = 'login';
+        return  <div className="auth__labels" >
+                  <label className="login__label" onClick={() => this.display_form('login')}>Login</label>
+                  <label className="signup__label" onClick={() => this.display_form('signup')}>Sign Up</label>
+                </div>
     }
     return (
       <div className="wrapper">
-        { logged_out_nav }
         { form }
       </div>
     ); 

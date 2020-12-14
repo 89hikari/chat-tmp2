@@ -10,6 +10,9 @@ const onSearch = value => console.log(value);
 
 // сайдбар слева (поиск и диалоги)
 const Dialogs = ({items, userId, onSearch, inputValue, onSelectDialog}) => {
+    
+    console.log(items) 
+    
     return (
         <div className="dialogs">
             <div className="chat__sidebar-search">
@@ -19,15 +22,17 @@ const Dialogs = ({items, userId, onSearch, inputValue, onSelectDialog}) => {
                         onChange={e => onSearch(e.target.value)}
                         value={inputValue}
                     />
-                </div>
-
-            {orderBy(items, ["created_at"], ["desc"]).map(item => (
-                <DialogItem
-                    onSelect={onSelectDialog}
-                    key={item.user._id}
-                    {... item}
-                    isMe={item.user._id === userId}/>
-            ))}            
+                </div>   
+            {       
+            
+    items.map(item => (
+                 <DialogItem
+                    id={item.id}
+                    user={item.username}
+                    avatar={item.avatar}
+                    isMe={item.id === userId}/>
+            ))
+}            
         </div>
     );
 };

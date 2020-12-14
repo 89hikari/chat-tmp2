@@ -13,7 +13,12 @@ code {
     monospace;
 }
 
-.auth__labels {
-  margin-left: auto !important;
-    margin-right: auto !important;
+.login__label, .signup__label, .logout{
+  margin: 10px;
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+.login__label:hover, .signup__label:hover , .logout:hover{
+  opacity: 1;
 }
