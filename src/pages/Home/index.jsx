@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { TeamOutlined, FormOutlined, EllipsisOutlined } from "@ant-design/icons";
 import { Status, InputChat, Sidebar } from "./../../components";
-import { Dialogs, Messages } from "./../../containers";
+import { Dialogs, Messages } from "./../../components";
 import { Modal, Button, Space } from 'antd';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import './Home.scss'
@@ -31,7 +31,7 @@ const Home = (props) => (
                     <Messages />
                 </div>
                 <div className="chat__dialog-input">
-                    <InputChat />
+                    <InputChat createMassage={props.createMassage} contactData={props.contactData} refresh={props.refreshContacts}/>
                 </div>
             </div>
         </div>

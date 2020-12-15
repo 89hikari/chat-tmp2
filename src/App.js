@@ -26,6 +26,8 @@ class App extends Component {
       contact_name: '',
       contact_id: '',
       message: '',
+      contact_avatar: null,
+      message_time: null,
       last_messages: [],
       messages: []
     };
@@ -69,6 +71,28 @@ class App extends Component {
           });
     }
     this.wait(1000)
+  }
+
+  createMessage = (toWhomId, text, date) => {
+    fetch('https://sleepy-waters-05131.herokuapp.com/messages/messages/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: `JWT ${localStorage.getItem('token')}`,
+      },
+      body: {
+        recipient_id: toWhomId,
+        text: text,
+        datetime: date
+      }
+    })
+      .then(res => res.json())
+      .then(json => {
+        this.setState({
+          messages: this.state.messages.push(json)
+        })
+      });
   }
 
   getContacts = () => {
@@ -203,9 +227,11 @@ class App extends Component {
           <label className="logout" onClick={() => this.handle_logout()}>Logout</label>
           <Home getContacts={this.state.contacts} 
                 contactName={this}
+                contactData={this}
                 addUser={this.addUser} 
                 getAllUsers={this.state.allUsers} 
                 refreshContacts={this.getContacts}
+                createMessage={this.createMessage}
                 />
         </div>
 
