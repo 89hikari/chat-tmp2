@@ -9,7 +9,7 @@ const { Search } = Input;
 const onSearch = value => console.log(value);
 
 // сайдбар слева (поиск и диалоги)
-const Dialogs = ({items, userId, onSearch, inputValue, onSelectDialog}) => { 
+const Dialogs = ({items, userId, onSearch, inputValue, onSelectDialog, contactName}) => { 
     
     return (
         <div className="dialogs">
@@ -25,6 +25,7 @@ const Dialogs = ({items, userId, onSearch, inputValue, onSelectDialog}) => {
             
     items.map(item => (
                  <DialogItem
+                    contactName={contactName}
                     id={item.id}
                     user={item.username}
                     avatar={item.avatar}

@@ -38,8 +38,8 @@ const Sidebar = (props) => {
         }
 
         setUser("");
-        wait(1000)
         props.refresh();
+        wait(1000)
     }
 
     function handleChange(event) {
@@ -61,6 +61,7 @@ const Sidebar = (props) => {
                 <div className="chat__sidebar-dialogs">
                     <div className="dialogs">
                         <Dialogs
+                            contactName={props.contactName}
                             items={props.users}
                         />
                     </div>

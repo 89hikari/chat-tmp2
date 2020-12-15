@@ -22,7 +22,12 @@ class App extends Component {
       username: '',
       id: null,
       allUsers: this.getAllUsers(),
-      contacts: []
+      contacts: [],
+      contact_name: '',
+      contact_id: '',
+      message: '',
+      last_messages: [],
+      messages: []
     };
   }
 
@@ -49,8 +54,6 @@ class App extends Component {
         .then(res => res.json())
         .then(json => {
           localStorage.setItem('token', json.token);
-          localStorage.setItem('id', json.user.id )
-          localStorage.setItem('username', json.user.username)
           this.setState({ displayed_form: 'home', logged_in: true });
         });
 
@@ -94,8 +97,6 @@ class App extends Component {
       .then(res => res.json())
       .then(json => {
         localStorage.setItem('token', json.token);
-        localStorage.setItem('id', json.user.id)
-        localStorage.setItem('username', json.user.username)
         this.setState({
           logged_in: true,
           displayed_form: 'home',
@@ -157,8 +158,6 @@ class App extends Component {
       .then(res => res.json())
       .then(json => {
         localStorage.setItem('token', json.token);
-        localStorage.setItem('id', json.id)
-        localStorage.setItem('username', json.username)
         this.setState({
           username: json.username,
           id: json.id,
@@ -202,7 +201,12 @@ class App extends Component {
         form = 
         <div>
           <label className="logout" onClick={() => this.handle_logout()}>Logout</label>
-          <Home getContacts={this.state.contacts} addUser={this.addUser} getAllUsers={this.state.allUsers} refreshContacts={this.getContacts}/>
+          <Home getContacts={this.state.contacts} 
+                contactName={this}
+                addUser={this.addUser} 
+                getAllUsers={this.state.allUsers} 
+                refreshContacts={this.getContacts}
+                />
         </div>
 
         break;

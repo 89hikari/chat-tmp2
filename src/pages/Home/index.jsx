@@ -14,13 +14,13 @@ const Home = (props) => (
     <section className="home">
         {props.refreshContacts()}
         <div className="chat">
-            <Sidebar users={props.getContacts} addUser={props.addUser} getAllUsers={props.getAllUsers} refresh={props.refreshContacts}/>
+            <Sidebar users={props.getContacts} contactName={props.contactName} addUser={props.addUser} getAllUsers={props.getAllUsers} refresh={props.refreshContacts}/>
             
             <div className="chat__dialog">
                 <div className="chat__dialog-header">
                     <div />
                     <div className="chat__dialog-header-center">
-                        <b className="chat__dialog-header-username">Vladislav Belousov</b>
+                        <b className="chat__dialog-header-username">{props.contactName.state.contact_name}</b>
                         <div className="chat__dialog-header-status">
                             <Status online />
                         </div>
