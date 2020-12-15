@@ -21,7 +21,7 @@ class App extends Component {
       logged_in: isLogin,
       username: '',
       id: null,
-      allUsers: [],
+      allUsers: this.getAllUsers(),
       contacts: []
     };
   }
@@ -57,6 +57,19 @@ class App extends Component {
     }
   }
 
+  getContacts = () => {
+    fetch('https://sleepy-waters-05131.herokuapp.com/users/contacts/', {
+          method: "GET",
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `JWT ${localStorage.getItem('token')}`,
+            }
+          }).then(res => res.json())
+          .then(json => {
+            this.setState({ contacts: json });
+          });
+  }
+
   handle_login = (e, data) => {
     e.preventDefault();
     fetch('https://sleepy-waters-05131.herokuapp.com/token-auth/', {
@@ -77,6 +90,23 @@ class App extends Component {
         });
       });
   };
+
+  addUser(id) {
+    fetch('https://sleepy-waters-05131.herokuapp.com/users/contacts/', {
+          method: "POST",
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `JWT ${localStorage.getItem('token')}`,
+            },
+            body: JSON.stringify({
+              id: id,
+            })
+          })
+  }
+
+  Rerender = () => {
+    this.forceUpdate()
+  }
 
   async getAllUsers(){
     await fetch('https://sleepy-waters-05131.herokuapp.com/users/users/', {
@@ -155,7 +185,7 @@ class App extends Component {
         form = 
         <div>
           <label className="logout" onClick={() => this.handle_logout()}>Logout</label>
-          <Home getAllUsers={this.state.contacts}/>
+          <Home getContacts={this.state.contacts} addUser={this.addUser} getAllUsers={this.state.allUsers} refreshContacts={this.getContacts}/>
         </div>
 
         break;

@@ -6,7 +6,6 @@ import {Dialogs as BaseDialogs} from './../components';
 
 const Dialogs = ({fetchDialogs, setCurrentDialogId, items, userId}) => {
 
-    console.log(items);
     const [inputValue, setValue] = useState('');
     const [filtered, setFilteredItems] = useState(items);
     const onChangeInput = value => {
@@ -27,7 +26,6 @@ const Dialogs = ({fetchDialogs, setCurrentDialogId, items, userId}) => {
 
     userId.then((value) => {
         value.map(function(name) {
-            console.log(name)
             
           });
     })

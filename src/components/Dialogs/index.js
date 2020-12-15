@@ -9,9 +9,7 @@ const { Search } = Input;
 const onSearch = value => console.log(value);
 
 // сайдбар слева (поиск и диалоги)
-const Dialogs = ({items, userId, onSearch, inputValue, onSelectDialog}) => {
-    
-    console.log(items) 
+const Dialogs = ({items, userId, onSearch, inputValue, onSelectDialog}) => { 
     
     return (
         <div className="dialogs">

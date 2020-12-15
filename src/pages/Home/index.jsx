@@ -14,7 +14,7 @@ const Home = (props) => (
     <section className="home">
 
         <div className="chat">
-            <Sidebar users={props.getAllUsers}/>
+            <Sidebar users={props.getContacts} addUser={props.addUser} getAllUsers={props.getAllUsers} refresh={props.refreshContacts}/>
             
             <div className="chat__dialog">
                 <div className="chat__dialog-header">

@@ -24,7 +24,7 @@ const DialogItem = ({ id, user, avatar, created_at, unreaded, isMe, text, onSele
                     <div className="dialogs__item-info-top">
                         <b>{user}</b>
                         <span>
-                            {console.log(id)}
+                            {}
                         </span>
                     </div>
                     <div className="dialogs__item-info-bottom">

@@ -14,6 +14,32 @@ const Sidebar = (props) => {
         setVisible(false);
     }
 
+    ///////////////////////
+
+    const [user, setUser] = React.useState("");
+
+    function handleSubmit(event) {
+        event.preventDefault();
+        const allUsers = props.getAllUsers;
+
+        for (let i = 0; i < allUsers.length; i++) {
+            if (allUsers[i].username == user) {
+                props.addUser(allUsers[i].id)
+                break;
+            }
+        }
+
+        setUser("");
+        props.refresh();
+    }
+
+    function handleChange(event) {
+        console.log(user)
+        setUser(event.target.value);
+    }
+
+    ///////////////////////
+
     return (
         <div className="chat__sidebar">
                 <div className="chat__sidebar-header">
@@ -38,12 +64,18 @@ const Sidebar = (props) => {
                         okText="Search"
                         cancelText="Cancel"
                         >
-                        <Search
-                            placeholder="input search text"
-                            allowClear
-                            onSearch={onSearch}
-                            style={{ width: '100%'}}
-                        />
+                        <form onSubmit={handleSubmit}>
+                            <label>
+                                Имя:
+                                <input
+                                    name="user"
+                                    type="text"
+                                    onChange={handleChange}
+                                    value={user}
+                                />
+                            </label>
+                            <input type="submit" value="Отправить" />
+                            </form>
                     </Modal>
                 </div>
             </div>
