@@ -18,6 +18,14 @@ const Sidebar = (props) => {
 
     const [user, setUser] = React.useState("");
 
+    function wait(ms){
+        var start = new Date().getTime();
+        var end = start;
+        while(end < start + ms) {
+          end = new Date().getTime();
+       }
+     }
+
     function handleSubmit(event) {
         event.preventDefault();
         const allUsers = props.getAllUsers;
@@ -31,6 +39,7 @@ const Sidebar = (props) => {
 
         setUser("");
         props.refresh();
+        wait(1000)
     }
 
     function handleChange(event) {
@@ -59,22 +68,20 @@ const Sidebar = (props) => {
                         className="modal"
                         title="Search user"
                         visible={visible}
-                        onOk={onClose}
+                        onOk={handleSubmit}
                         onCancel={onClose}
                         okText="Search"
                         cancelText="Cancel"
                         >
                         <form onSubmit={handleSubmit}>
-                            <label>
-                                Имя:
+                            <p>Enter username to find:</p>
                                 <input
+                                    className="searchUsername"
                                     name="user"
                                     type="text"
                                     onChange={handleChange}
                                     value={user}
                                 />
-                            </label>
-                            <input type="submit" value="Отправить" />
                             </form>
                     </Modal>
                 </div>

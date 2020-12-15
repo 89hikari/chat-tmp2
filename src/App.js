@@ -5,6 +5,7 @@ import fetch from 'isomorphic-fetch';
 
 import { Auth, Home } from './pages';
 import './index.css';
+import { isThisWeek } from 'date-fns';
 
 class App extends Component {
 
@@ -24,6 +25,14 @@ class App extends Component {
       allUsers: this.getAllUsers(),
       contacts: []
     };
+  }
+
+  wait(ms){
+    var start = new Date().getTime();
+    var end = start;
+    while(end < start + ms) {
+      end = new Date().getTime();
+   }
   }
 
   componentDidMount() {
@@ -55,6 +64,7 @@ class App extends Component {
             this.setState({ contacts: json });
           });
     }
+    this.wait(1000)
   }
 
   getContacts = () => {
@@ -67,7 +77,7 @@ class App extends Component {
           }).then(res => res.json())
           .then(json => {
             this.setState({ contacts: json });
-          });
+    })
   }
 
   handle_login = (e, data) => {
