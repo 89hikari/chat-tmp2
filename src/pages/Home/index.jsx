@@ -12,7 +12,7 @@ import { useState } from 'react';
 
 const Home = (props) => (
     <section className="home">
-
+        {props.refreshContacts()}
         <div className="chat">
             <Sidebar users={props.getContacts} addUser={props.addUser} getAllUsers={props.getAllUsers} refresh={props.refreshContacts}/>
             

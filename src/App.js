@@ -5,7 +5,6 @@ import fetch from 'isomorphic-fetch';
 
 import { Auth, Home } from './pages';
 import './index.css';
-import { isThisWeek } from 'date-fns';
 
 class App extends Component {
 
@@ -33,7 +32,7 @@ class App extends Component {
     while(end < start + ms) {
       end = new Date().getTime();
    }
-  }
+ }
 
   componentDidMount() {
     if (this.state.logged_in) {
@@ -50,7 +49,9 @@ class App extends Component {
         .then(res => res.json())
         .then(json => {
           localStorage.setItem('token', json.token);
-          this.setState({ username: json.username, displayed_form: 'home', logged_in: true });
+          localStorage.setItem('id', json.user.id )
+          localStorage.setItem('username', json.user.username)
+          this.setState({ displayed_form: 'home', logged_in: true });
         });
 
         fetch('https://sleepy-waters-05131.herokuapp.com/users/contacts/', {
@@ -93,12 +94,16 @@ class App extends Component {
       .then(res => res.json())
       .then(json => {
         localStorage.setItem('token', json.token);
+        localStorage.setItem('id', json.user.id)
+        localStorage.setItem('username', json.user.username)
         this.setState({
           logged_in: true,
           displayed_form: 'home',
-          username: json.user.username
+          username: json.user.username,
+          id: json.user.id,
         });
       });
+      this.wait(500)
   };
 
   addUser(id) {
@@ -118,8 +123,8 @@ class App extends Component {
     this.forceUpdate()
   }
 
-  async getAllUsers(){
-    await fetch('https://sleepy-waters-05131.herokuapp.com/users/users/', {
+  getAllUsers(){
+    fetch('https://sleepy-waters-05131.herokuapp.com/users/users/', {
       method: "GET",
         headers: {
           'Content-Type': 'application/json',
@@ -152,6 +157,8 @@ class App extends Component {
       .then(res => res.json())
       .then(json => {
         localStorage.setItem('token', json.token);
+        localStorage.setItem('id', json.id)
+        localStorage.setItem('username', json.username)
         this.setState({
           username: json.username,
           id: json.id,

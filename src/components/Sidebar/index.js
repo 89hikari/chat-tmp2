@@ -29,7 +29,7 @@ const Sidebar = (props) => {
     function handleSubmit(event) {
         event.preventDefault();
         const allUsers = props.getAllUsers;
-
+        wait(1000)
         for (let i = 0; i < allUsers.length; i++) {
             if (allUsers[i].username == user) {
                 props.addUser(allUsers[i].id)
@@ -38,8 +38,8 @@ const Sidebar = (props) => {
         }
 
         setUser("");
-        props.refresh();
         wait(1000)
+        props.refresh();
     }
 
     function handleChange(event) {
