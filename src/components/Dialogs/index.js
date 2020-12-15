@@ -30,7 +30,9 @@ const Dialogs = ({items, userId, onSearch, inputValue, onSelectDialog}) => {
                     id={item.id}
                     user={item.username}
                     avatar={item.avatar}
-                    isMe={item.id === userId}/>
+                    isMe={item.id === userId}
+                    onSelect={onSelectDialog}
+                    />
             ))
 }            
         </div>

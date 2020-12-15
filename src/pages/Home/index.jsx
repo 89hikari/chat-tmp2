@@ -15,7 +15,7 @@ const Home = (props) => (
 
         <div className="chat">
             <Sidebar users={props.getAllUsers}/>
-
+            
             <div className="chat__dialog">
                 <div className="chat__dialog-header">
                     <div />
