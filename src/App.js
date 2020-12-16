@@ -81,18 +81,26 @@ class App extends Component {
         Accept: 'application/json',
         Authorization: `JWT ${localStorage.getItem('token')}`,
       },
-      body: {
+      body: JSON.stringify({
         recipient_id: toWhomId,
         text: text,
         datetime: date
-      }
+      })
     })
-      .then(res => res.json())
-      .then(json => {
-        this.setState({
-          messages: this.state.messages.push(json)
-        })
-      });
+    this.Rerender();
+  }
+
+  getMessages = (id) => {
+    fetch(`https://sleepy-waters-05131.herokuapp.com/messages/messages/?contact_id=${id}`, {
+          method: "GET",
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `JWT ${localStorage.getItem('token')}`,
+            }
+          }).then(res => res.json())
+          .then(json => {
+            this.setState({ messages: json });
+    })
   }
 
   getContacts = () => {

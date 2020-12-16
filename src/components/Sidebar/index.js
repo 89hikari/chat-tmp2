@@ -61,6 +61,7 @@ const Sidebar = (props) => {
                 <div className="chat__sidebar-dialogs">
                     <div className="dialogs">
                         <Dialogs
+                            contactData={props.contactData}
                             contactName={props.contactName}
                             items={props.users}
                         />
