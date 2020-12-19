@@ -1,5 +1,7 @@
 https://chat-app1-d20f1.web.app/ - работающее приложение
 
+https://github.com/89hikari/messenger - основной репозитрий для фронтенда
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
